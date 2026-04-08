@@ -1,0 +1,152 @@
+body {
+    margin: 0;
+    font-family: "Segoe UI", sans-serif;
+    background: #0b0f19;
+    color: white;
+}
+
+/* Layout */
+.app {
+    display: flex;
+    height: 100vh;
+}
+
+/* Sidebar */
+.sidebar {
+    width: 260px;
+    background: #05070d;
+    padding: 20px;
+    border-right: 1px solid #111;
+}
+
+.sidebar h2 {
+    margin-bottom: 20px;
+}
+
+.sidebar button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    background: linear-gradient(135deg, #6c5ce7, #00cec9);
+    color: white;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.sidebar button:hover {
+    transform: scale(1.05);
+}
+
+/* Main */
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Chat */
+.chat {
+    flex: 1;
+    padding: 50px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+/* Messages */
+.msg {
+    max-width: 65%;
+    padding: 16px;
+    border-radius: 14px;
+    line-height: 1.6;
+    animation: fadeIn 0.3s ease;
+}
+
+.user {
+    align-self: flex-end;
+    background: #1abc9c;
+    color: black;
+}
+
+.bot {
+    align-self: flex-start;
+    background: #1e272e;
+}
+
+/* Markdown styling */
+.msg.bot h1, .msg.bot h2, .msg.bot h3 {
+    color: #00cec9;
+}
+
+.msg.bot p {
+    margin: 10px 0;
+}
+
+.msg.bot strong {
+    color: white;
+}
+
+/* Error */
+.error {
+    align-self: center;
+    background: #e74c3c;
+}
+
+/* Loader */
+.loader {
+    opacity: 0.7;
+    font-style: italic;
+}
+
+/* Animated dots */
+.dots::after {
+    content: "";
+    animation: dots 1.5s infinite;
+}
+
+@keyframes dots {
+    0% { content: ""; }
+    33% { content: "."; }
+    66% { content: ".."; }
+    100% { content: "..."; }
+}
+
+/* Input */
+.input-area {
+    display: flex;
+    gap: 10px;
+    padding: 20px;
+    border-top: 1px solid #111;
+    background: #05070d;
+}
+
+.input-area input {
+    flex: 1;
+    padding: 14px;
+    border-radius: 10px;
+    border: none;
+    background: #1e272e;
+    color: white;
+}
+
+.input-area button {
+    padding: 14px 20px;
+    border-radius: 10px;
+    border: none;
+    background: #00cec9;
+    color: black;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+.input-area button:hover {
+    transform: scale(1.05);
+}
+
+/* Animation */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}

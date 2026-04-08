@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Draft Mind AI</title>
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/static/style.css?v=1000">
+
+    <!-- Markdown -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+</head>
+
+<body>
+<div class="app">
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <h2>DraftMind AI</h2>
+        <button onclick="clearChat()">+ New Chat</button>
+    </div>
+
+    <!-- Main -->
+    <div class="main">
+
+        <div id="chat" class="chat"></div>
+
+        <!-- Input -->
+        <form id="form" class="input-area">
+            <input type="text" id="topic" placeholder="Ask anything..." required>
+            <input type="number" id="words" placeholder="Words">
+            <button>➤</button>
+        </form>
+
+    </div>
+
+</div>
+
+<script>
+const form = document.getElementById("form");
+const chat = document.getElementById("chat");
+
+form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+
+    const topic = document.getElementById("topic").value;
+    const words = document.getElementById("words").value;
+
+    addMessage(topic, "user");
+    showLoader();
+
+    try {
+        const res = await fetch("/", {
+            method: "POST",
+            headers: {"Content-Type": "application/x-www-form-urlencoded"},
+            body: `topic=${encodeURIComponent(topic)}&word_limit=${encodeURIComponent(words)}`
+        });
+
+        const data = await res.json();
+        removeLoader();
+
+        if (!data.draft || data.draft.includes("Error")) {
+            addMessage("⚠️ Failed to generate. Try again.", "error");
+        } else {
+            typeMessage(data.draft);
+        }
+
+    } catch (err) {
+        removeLoader();
+        addMessage("⚠️ Network error.", "error");
+    }
+
+    form.reset();
+});
+
+/* USER MESSAGE */
+function addMessage(text, type) {
+    const msg = document.createElement("div");
+    msg.className = "msg " + type;
+    msg.innerText = text;
+    chat.appendChild(msg);
+    chat.scrollTop = chat.scrollHeight;
+}
+
+/* AI RESPONSE */
+function typeMessage(text) {
+    const msg = document.createElement("div");
+    msg.className = "msg bot";
+    chat.appendChild(msg);
+
+    let i = 0;
+    let temp = "";
+
+    const interval = setInterval(() => {
+        temp += text[i];
+        msg.innerHTML = marked.parse(temp);
+        i++;
+        chat.scrollTop = chat.scrollHeight;
+
+        if (i >= text.length) clearInterval(interval);
+    }, 8);
+}
+
+/* THINKING LOADER */
+function showLoader() {
+    const loader = document.createElement("div");
+    loader.className = "msg bot loader";
+    loader.id = "loader";
+
+    loader.innerHTML = `
+        <span>Thinking</span>
+        <span class="dots"></span>
+    `;
+
+    chat.appendChild(loader);
+}
+
+function removeLoader() {
+    const loader = document.getElementById("loader");
+    if (loader) loader.remove();
+}
+
+/* CLEAR CHAT */
+function clearChat() {
+    chat.innerHTML = "";
+}
+</script>
+
+</body>
+</html>

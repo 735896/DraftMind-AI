@@ -1,10 +1,10 @@
-# 🚀 DraftMind AI
+# DraftMind AI
 
 DraftMind AI is an ethical AI-powered assignment drafting assistant that helps students generate structured academic drafts while encouraging original thinking.
 
 ---
 
-## 🧠 Problem
+## Problem
 
 Students often misuse AI tools to generate full answers, leading to:
 - Plagiarism
@@ -13,7 +13,7 @@ Students often misuse AI tools to generate full answers, leading to:
 
 ---
 
-## ✅ Solution
+## Solution
 
 DraftMind AI solves this by:
 - Generating **draft-level content**
@@ -22,15 +22,15 @@ DraftMind AI solves this by:
 
 ---
 
-## ⚙️ Tech Stack
+## Tech Stack
 
-- 🐍 Python (Flask)
-- 🌐 HTML, CSS, JavaScript
-- 🤖 Google Gemini API
+- Python (Flask)
+- HTML, CSS, JavaScript
+- Google Gemini API
 
 ---
 
-## 🔄 How It Works
+## How It Works
 
 1. User enters a topic
 2. Flask backend processes request
@@ -39,17 +39,17 @@ DraftMind AI solves this by:
 
 ---
 
-## ✨ Features
+## Features
 
-- 💬 Chat-based interface
-- 🧠 Thinking animation
-- 📱 Mobile responsive UI
-- ⚡ Fast API response
-- 🔒 Secure API handling
+- Chat-based interface
+- Thinking animation
+- Mobile responsive UI
+- Fast API response
+- Secure API handling
 
 ---
 
-## ▶️ Run Locally
+## Run Locally
 
 ```bash
 git clone https://github.com/735896/DraftMind-AI.git
